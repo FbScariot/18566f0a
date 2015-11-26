@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace LIFNE.Models
@@ -79,6 +80,36 @@ namespace LIFNE.Models
         [Display(Name = "Confirmação de senha")]
         [Compare("Password", ErrorMessage = "Os campos 'Senha' e a 'Confirmação de senha' não são iguais.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Domínio")]
+        public String SubDomain { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Sobre mim")]
+        public String SelfDefinition { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Cor")]
+        public String MenuColor { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Foto")]
+        public String Photo { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Indicado Por")]
+        public String IndicatedBy { get; set; }
+
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Telefone")]
+        public String PhoneNumber { get; set; } 
     }
 
     public class ResetPasswordViewModel

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
+using System.Drawing;
 
 namespace LIFNE.Models
 {
@@ -18,7 +19,11 @@ namespace LIFNE.Models
             return userIdentity;
         }
 
-        public DateTime BirthDate { get; set; } 
+        public String SubDomain { get; set; }
+        public String SelfDefinition { get; set; }
+        public String MenuColor { get; set; }
+        public String Photo { get; set; }
+        public String IndicatedBy { get; set; } 
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -33,6 +38,6 @@ namespace LIFNE.Models
             return new ApplicationDbContext();
         }
 
-      
+        public DbSet<LIFNE.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }
