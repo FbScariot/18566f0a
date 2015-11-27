@@ -17,7 +17,7 @@ namespace LIFNE.Controllers
         // GET: Menus
         public ActionResult Index()
         {
-            var menus = db.Menus.Include(m => m.AspNetUser).Include(m => m.Menu2);
+            var menus = db.Menus.Include(m => m.AspNetUser).Include(m => m.Pai);
             return View(menus.ToList());
         }
 

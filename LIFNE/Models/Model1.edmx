@@ -255,8 +255,8 @@
           <Property Name="CodMenuPai" Type="Int32" />
           <Property Name="IdAspNetUsers" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Menu_AspNetUsers" FromRole="Menu" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Menu1" Relationship="Self.FK_Menu_Menu" FromRole="Menu" ToRole="Menu1" />
-          <NavigationProperty Name="Menu2" Relationship="Self.FK_Menu_Menu" FromRole="Menu1" ToRole="Menu" />
+          <NavigationProperty Name="Filhos" Relationship="Self.FK_Menu_Menu" FromRole="Menu" ToRole="Menu1" />
+          <NavigationProperty Name="Pai" Relationship="Self.FK_Menu_Menu" FromRole="Menu1" ToRole="Menu" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">

@@ -16,7 +16,7 @@ namespace LIFNE.Models
     {
         public Menu()
         {
-            this.Menu1 = new HashSet<Menu>();
+            this.Filhos = new HashSet<Menu>();
         }
     
         public int Codigo { get; set; }
@@ -27,7 +27,7 @@ namespace LIFNE.Models
         public string IdAspNetUsers { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
-        public virtual ICollection<Menu> Menu1 { get; set; }
-        public virtual Menu Menu2 { get; set; }
+        public virtual ICollection<Menu> Filhos { get; set; }
+        public virtual Menu Pai { get; set; }
     }
 }
