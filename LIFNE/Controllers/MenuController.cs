@@ -12,7 +12,7 @@ namespace LIFNE.Controllers
 {
     public class MenuController : Controller
     {
-        private LIFNEEntities1 db = new LIFNEEntities1();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Menus
         public ActionResult Index()
@@ -39,7 +39,7 @@ namespace LIFNE.Controllers
         // GET: Menus/Create
         public ActionResult Create()
         {
-            ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "UserName");
+            ViewBag.IdAspNetUsers = new SelectList(db.ApplicationUsers, "Id", "UserName");
             ViewBag.CodMenuPai = new SelectList(db.Menus, "Codigo", "Titulo");
             return View();
         }
@@ -60,7 +60,7 @@ namespace LIFNE.Controllers
                     return RedirectToAction("Index");
                 }
 
-                ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "UserName", menu.IdAspNetUsers);
+                ViewBag.IdAspNetUsers = new SelectList(db.ApplicationUsers, "Id", "UserName", menu.IdAspNetUsers);
                 ViewBag.CodMenuPai = new SelectList(db.Menus, "Codigo", "Titulo", menu.CodMenuPai);
                 return View(menu);
             }
@@ -82,7 +82,7 @@ namespace LIFNE.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "UserName", menu.IdAspNetUsers);
+            ViewBag.IdAspNetUsers = new SelectList(db.ApplicationUsers, "Id", "UserName", menu.IdAspNetUsers);
             ViewBag.CodMenuPai = new SelectList(db.Menus, "Codigo", "Titulo", menu.CodMenuPai);
             return View(menu);
         }
@@ -100,7 +100,7 @@ namespace LIFNE.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdAspNetUsers = new SelectList(db.AspNetUsers, "Id", "UserName", menu.IdAspNetUsers);
+            ViewBag.IdAspNetUsers = new SelectList(db.ApplicationUsers, "Id", "UserName", menu.IdAspNetUsers);
             ViewBag.CodMenuPai = new SelectList(db.Menus, "Codigo", "Titulo", menu.CodMenuPai);
             return View(menu);
         }

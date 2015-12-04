@@ -38,6 +38,7 @@ namespace LIFNE.Models
             return new ApplicationDbContext();
         }
 
+        public DbSet<LIFNE.Models.Menu> Menus { get; set; }
         public DbSet<LIFNE.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

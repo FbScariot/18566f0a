@@ -12,7 +12,7 @@ namespace LIFNE.Controllers
 {
     public class HomeController : Controller
     {
-        private LIFNEEntities1 db = new LIFNEEntities1();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ActionResult Index()
         {

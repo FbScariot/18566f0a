@@ -16,6 +16,7 @@ namespace LIFNE.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -142,6 +143,7 @@ namespace LIFNE.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.IndicatedBy = new SelectList(db.ApplicationUsers, "Id", "UserName");
             return View();
         }
 
