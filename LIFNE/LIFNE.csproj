@@ -188,10 +188,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="AspNetRole.cs" />
-    <Compile Include="AspNetUser.cs" />
-    <Compile Include="AspNetUserClaim.cs" />
-    <Compile Include="AspNetUserLogin.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -223,6 +219,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="DataBase\Script Inicial.sql" />
+    <Content Include="DataBase\Versão Funcionando.sql" />
     <Content Include="Documentação\IMG-20151119-WA0045.jpg" />
     <Content Include="Documentação\Logotipo.jpg" />
     <Content Include="favicon.ico" />
