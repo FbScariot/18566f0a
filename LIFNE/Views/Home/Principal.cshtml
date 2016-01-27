@@ -191,32 +191,32 @@
                 @BuildMenu(Model, null)
                 @helper BuildMenu(IEnumerable<LIFNE.Models.Menu> menu, int? parentId = null)
                 {
-                    List<LIFNE.Models.Menu> items = menu.Where(d => d.CodMenuPai == parentId).OrderBy(i => i.Codigo).ToList();
+                    List<LIFNE.Models.Menu> items = menu.Where(d => d.MenuPai == null).OrderBy(i => i.Codigo).ToList();
                     if (items.Any())
                     {
                         foreach (LIFNE.Models.Menu item in items)
                         {
-                            if (item.CodMenuPai == null)
+                            if (item.MenuPai == null)
                             {
-                <ul>
-                    <li>
-                        <h3>
-                            <span class="icon-dashboard"></span>@item.Titulo
-                        </h3>
-                        <ul>
-                            @foreach (LIFNE.Models.Menu itemFilho in item.Filhos.ToList())
+                                <ul>
+                                    <li>
+                                        <h3>
+                                            <span class="icon-dashboard"></span>@item.Titulo
+                                        </h3>
+                                        <ul>
+                                            @foreach (LIFNE.Models.Menu itemFilho in item.Filhos.ToList())
                                             {
-                            <li>
-                                @Html.ActionLink(@itemFilho.Titulo, "Principal", new { id = itemFilho.Codigo })
-                            </li>
-                                            }
-                        </ul>
-                    </li>
-                </ul>
+                                                <li>
+                                                    @Html.ActionLink(@itemFilho.Titulo, "Principal", new { id = itemFilho.Codigo })
+                                                </li>
+                                                }
+                                        </ul>
+                                    </li>
+                                </ul>
                             }
                         }
                     }
-}
+                }
             </div>
         @*</div>
     </div>*@

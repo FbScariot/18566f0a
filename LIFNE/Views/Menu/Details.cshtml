@@ -28,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Conteudo)
+            Conteúdo
         </dt>
 
         <dd>
@@ -36,21 +36,20 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            Menu Pai
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MenuPai.Titulo)
+        </dd>
+
+        <dt>
+            Usuário
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.AspNetUser.Email)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Pai.Tipo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Pai.Tipo)
-        </dd>
-
     </dl>
 </div>
 <p>

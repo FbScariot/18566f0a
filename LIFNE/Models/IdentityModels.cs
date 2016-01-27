@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Drawing;
+using System.Data.Entity.Infrastructure;
 
 namespace LIFNE.Models
 {
@@ -24,21 +25,5 @@ namespace LIFNE.Models
         public String MenuColor { get; set; }
         public String Photo { get; set; }
         public String IndicatedBy { get; set; } 
-    }
-
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-        }
-
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
-
-        public DbSet<LIFNE.Models.Menu> Menus { get; set; }
-        public DbSet<LIFNE.Models.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

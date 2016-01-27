@@ -9,9 +9,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using LIFNE.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace LIFNE.Controllers
 {
+
     [Authorize]
     public class AccountController : Controller
     {
@@ -143,7 +145,7 @@ namespace LIFNE.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.IndicatedBy = new SelectList(db.ApplicationUsers, "Id", "UserName");
+            ViewBag.IndicatedBy = new SelectList(db.Users, "Id", "UserName");
             return View();
         }
 
@@ -152,11 +154,12 @@ namespace LIFNE.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register([Bind(Include = "Email, Password, ConfirmPassword, PhoneNumber, SubDomain, SelfDefinition, MenuColor, Photo, IndicatedBy")] RegisterViewModel model)
         {
+
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, PhoneNumber = model.PhoneNumber, SubDomain = model.SubDomain, SelfDefinition = model.SelfDefinition, MenuColor = model.MenuColor, Photo = model.Photo, IndicatedBy = model.IndicatedBy };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -174,6 +177,7 @@ namespace LIFNE.Controllers
             }
 
             // If we got this far, something failed, redisplay form
+            ViewBag.IndicatedBy = new SelectList(db.Users, "Id", "UserName", model.IndicatedBy);
             return View(model);
         }
 

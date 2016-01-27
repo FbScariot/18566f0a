@@ -26,7 +26,9 @@ namespace LIFNE.Controllers
                 Menu menu = db.Menus.Find(id);
                 ViewBag.IFrameSrc = menu.Conteudo;
             }
-            var menus = db.Menus.Include(m => m.AspNetUser).Include(m => m.Pai);
+
+            var menus = db.Menus.Include(m => m.AspNetUser).Include(m => m.MenuPai);
+
             return View(menus.ToList());
         }
 

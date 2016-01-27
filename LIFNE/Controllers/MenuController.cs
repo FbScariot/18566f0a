@@ -10,6 +10,7 @@ using LIFNE.Models;
 
 namespace LIFNE.Controllers
 {
+    [Authorize]
     public class MenuController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -17,7 +18,13 @@ namespace LIFNE.Controllers
         // GET: Menus
         public ActionResult Index()
         {
-            var menus = db.Menus.Include(m => m.AspNetUser).Include(m => m.Pai);
+            var menus = db.Menus.Include(m => m.MenuPai).Include(m => m.AspNetUser);
+
+            if (!User.IsInRole("Administrador"))
+            {
+                menus = menus.Where(m => m.AspNetUser.Email == User.Identity.Name);
+            }
+
             return View(menus.ToList());
         }
 
@@ -39,7 +46,7 @@ namespace LIFNE.Controllers
         // GET: Menus/Create
         public ActionResult Create()
         {
-            ViewBag.IdAspNetUsers = new SelectList(db.ApplicationUsers, "Id", "UserName");
+            ViewBag.IdAspNetUsers = new SelectList(db.Users, "Id", "UserName");
             ViewBag.CodMenuPai = new SelectList(db.Menus, "Codigo", "Titulo");
             return View();
         }
@@ -60,8 +67,8 @@ namespace LIFNE.Controllers
                     return RedirectToAction("Index");
                 }
 
-                ViewBag.IdAspNetUsers = new SelectList(db.ApplicationUsers, "Id", "UserName", menu.IdAspNetUsers);
-                ViewBag.CodMenuPai = new SelectList(db.Menus, "Codigo", "Titulo", menu.CodMenuPai);
+                ViewBag.IdAspNetUsers = new SelectList(db.Users, "Id", "UserName", menu.AspNetUser.Id);
+                ViewBag.CodMenuPai = new SelectList(db.Menus, "Codigo", "Titulo", menu.MenuPai.Codigo);
                 return View(menu);
             }
             catch (Exception ex)
@@ -82,8 +89,23 @@ namespace LIFNE.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IdAspNetUsers = new SelectList(db.ApplicationUsers, "Id", "UserName", menu.IdAspNetUsers);
-            ViewBag.CodMenuPai = new SelectList(db.Menus, "Codigo", "Titulo", menu.CodMenuPai);
+
+            List<Menu> menus = null;
+            List<ApplicationUser> usuarios = null;
+
+            if (User.IsInRole("Administrador"))
+            {
+                menus = db.Menus.ToList();
+                usuarios = db.Users.ToList();
+            }
+            else
+            {
+                menus = db.Menus.Where(m => m.AspNetUser.Email == User.Identity.Name).ToList();
+                usuarios = db.Users.Where(u => u.Email == User.Identity.Name).ToList();
+            }
+
+            ViewBag.IdAspNetUsers = new SelectList(usuarios, "Id", "UserName", menu.AspNetUser.Id);
+            ViewBag.CodMenuPai = new SelectList(menus, "Codigo", "Titulo", menu.MenuPai.Codigo);
             return View(menu);
         }
 
@@ -100,8 +122,8 @@ namespace LIFNE.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdAspNetUsers = new SelectList(db.ApplicationUsers, "Id", "UserName", menu.IdAspNetUsers);
-            ViewBag.CodMenuPai = new SelectList(db.Menus, "Codigo", "Titulo", menu.CodMenuPai);
+            ViewBag.IdAspNetUsers = new SelectList(db.Users, "Id", "UserName", menu.AspNetUser.Id);
+            ViewBag.CodMenuPai = new SelectList(db.Menus, "Codigo", "Titulo", menu.MenuPai.Codigo);
             return View(menu);
         }
 
